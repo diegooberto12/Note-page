@@ -23,6 +23,7 @@ class Post {
         return normal_string;
     }
 }
+///eweq
 class project {
    constructor(project){
     this.project = project;
