@@ -4,7 +4,6 @@ import odinImage from "./assets/odin.jpg";
 import { getDate } from "date-fns";
 ///console.log(greeting);
 
-const body = document.querySelector(".upper");
 class Post {
     constructor(post,description,is_done,date_made,priority){
         this.post = post;
@@ -67,14 +66,21 @@ for (let i=0; i < localStorage.length;i++){
    //     console.log(`${item.posts[e].description} esto es la descripcion de la tarea`);
    // }
 }
+const img = document.createElement('img');
+img.src = odinImage;
+const upper = document.querySelector(".upper");
+const body = document.querySelector(".bottom");
+const title = document.querySelector(".title");
+const list = document.querySelector(".list");
+upper.appendChild(img);
+
 for (let i=0; i < localStorage.length;i++){
     const key = localStorage.key(i);
     const item = JSON.parse(localStorage.getItem(key));
     const div = document.createElement("div");
     div.textContent=`${item.project}`;
     div.addEventListener('click',function(){
-        alert(`${item.posts[0].post}`)
-        alert(`${item.posts[0].description}`)
+        title.textContent=item.project; 
 
     })
     body.appendChild(div);
