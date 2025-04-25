@@ -1,5 +1,5 @@
 import "./styles.css";
-import { greeting } from "./greeting.js";
+//import { greeting } from "./greeting.js";
 import odinImage from "./assets/odin.jpg";
 import { getDate } from "date-fns";
 ///console.log(greeting);
@@ -60,7 +60,7 @@ for (let i=0; i < localStorage.length;i++){
     const item = JSON.parse(localStorage.getItem(key));
    // console.log(key)
     //console.log(item.posts[1]);
-    console.log(`${item.project} esto es el titulo del projecto o tarea principal`)
+    console.log(`${item.posts[0].description}`)
    // for (let e = 0; e < item.posts.length; e++){
    //     console.log(`${item.posts[e].post} esto es una tarea`);
    //     console.log(`${item.posts[e].description} esto es la descripcion de la tarea`);
@@ -75,14 +75,38 @@ const list = document.querySelector(".list");
 upper.appendChild(img);
 
 for (let i=0; i < localStorage.length;i++){
+    
     const key = localStorage.key(i);
     const item = JSON.parse(localStorage.getItem(key));
     const div = document.createElement("div");
+    const button = document.createElement("button");
+
+    button.textContent="➕ New Post"
+    button.id=("openModalBtn");
+
     div.textContent=`${item.project}`;
+    
     div.addEventListener('click',function(){
         title.textContent=item.project; 
+        list.innerHTML='';
+        for (let j= 0; j< item.posts.length;j++){
+            const post1 = item.posts[j];
 
-    })
+            const task =document.createElement("div");
+            task.classList.add("task");
+            task.innerHTML=` 
+                <h4>${post1.post}</h4>
+                <p>${post1.description}</p>
+                <p><strong>Hecho:</strong> ${post1.is_done ? "✅" : "❌"}</p>
+                <p><strong>Fecha:</strong> ${post1.date_made}</p>
+                <p><strong>Prioridad:</strong> ${post1.priority}</p>
+            `;
+            list.appendChild(task);
+
+        };
+         list.appendChild(button)
+
+    });
     body.appendChild(div);
 
 }
